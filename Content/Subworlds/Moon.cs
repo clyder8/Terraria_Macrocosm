@@ -157,6 +157,38 @@ namespace Macrocosm.Content.Subworlds
             else
                 MeteorBoost = 1f;
         }
+        public override void RandomTileUpdate(int i, int j, bool underground){
+            if(Main.tile[i,j].TileType ==ModContent.TileType<ProtolithCrystalGrower>()){
+            Tile below = Main.tile[i, j + 1];
+            Tile above = Main.tile[i, j - 1];
+            Tile right = Main.tile[i + 1, j];
+            Tile left = Main.tile[i - 1, j];
+            if (!above.HasTile && Main.tile[i, j].HasTile)
+            {
+                int rand = Main.rand.Next(20);
+                WorldGen.PlaceObject(i, j - 1, ModContent.TileType<LuminiteCrystalTile>(), true, rand);
+                NetMessage.SendObjectPlacement(-1, i, j - 1, ModContent.TileType<LuminiteCrystalTile>(), rand, 0, -1, -1);
+            }
+            if (!below.HasTile && Main.tile[i, j].HasTile)
+            {
+                int rand = Main.rand.Next(20);
+                WorldGen.PlaceObject(i, j + 1, ModContent.TileType<LuminiteCrystalTile>(), true, rand);
+                NetMessage.SendObjectPlacement(-1, i, j + 1, ModContent.TileType<LuminiteCrystalTile>(), rand, 0, -1, -1);
+            }
+            if (!right.HasTile && Main.tile[i, j].HasTile)
+            {
+                int rand = Main.rand.Next(20);
+                WorldGen.PlaceObject(i+1, j, ModContent.TileType<LuminiteCrystalTile>(), true, rand);
+                NetMessage.SendObjectPlacement(-1, i+ 1, j, ModContent.TileType<LuminiteCrystalTile>(), rand, 0, -1, -1);
+            }
+            if (!left.HasTile && Main.tile[i, j].HasTile)
+            {
+                int rand = Main.rand.Next(20);
+                WorldGen.PlaceObject(i-1, j, ModContent.TileType<LuminiteCrystalTile>(), true, rand);
+                NetMessage.SendObjectPlacement(-1, i-1, j, ModContent.TileType<LuminiteCrystalTile>(), rand, 0, -1, -1);
+            }
+            }
+        }
 
         private void UpdateMeteorSpawn()
         {
