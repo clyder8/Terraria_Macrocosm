@@ -1,4 +1,5 @@
-﻿using Macrocosm.Common.Utils;
+﻿using Macrocosm.Common.Subworlds;
+using Macrocosm.Common.Utils;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
@@ -33,7 +34,7 @@ namespace Macrocosm.Content.Rockets
             };
 
             RocketManager.AddRocket(rocket);
-            rocket.OnCreation();
+            rocket.CurrentWorld = MacrocosmSubworld.CurrentID;
             rocket.NetSync();
             rocket.Inventory.SyncEverything();
 

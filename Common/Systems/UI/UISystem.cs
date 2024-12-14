@@ -44,7 +44,7 @@ namespace Macrocosm.Common.Systems.UI
                 return;
 
             UserInterface = new UserInterface();
-            MacrocosmConfig.Instance.OnConfigChanged += OnConfigChanged;
+            ClientConfig.Instance.OnConfigChanged += OnConfigChanged;
         }
 
         public override void Unload()
@@ -159,7 +159,7 @@ namespace Macrocosm.Common.Systems.UI
             if (Main.netMode == NetmodeID.Server || UserInterface.CurrentState is not null)
                 return;
 
-            if (UIAssemblyState is not null && !(UIAssemblyState.LaunchPad.Inventory.InteractingPlayer == Main.myPlayer || UIAssemblyState.LaunchPad.Inventory.InteractingPlayer == 255))
+            if (UIAssemblyState is not null && UIAssemblyState.LaunchPad is not null && !(UIAssemblyState.LaunchPad.Inventory.InteractingPlayer == Main.myPlayer || UIAssemblyState.LaunchPad.Inventory.InteractingPlayer == 255))
                 return;
 
             UIAssemblyState = new();

@@ -1,4 +1,5 @@
-﻿using Macrocosm.Content.Projectiles.Friendly.Melee;
+﻿using Macrocosm.Common.Utils;
+using Macrocosm.Content.Projectiles.Friendly.Melee;
 using Macrocosm.Content.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -18,6 +19,8 @@ namespace Macrocosm.Content.Items.Weapons.Melee
         }
         public override void SetDefaults()
         {
+            Item.width = 72;
+            Item.height = 72;
             Item.damage = 550;
             Item.DamageType = DamageClass.Melee;
             Item.knockBack = 5;
@@ -40,13 +43,14 @@ namespace Macrocosm.Content.Items.Weapons.Melee
 
         public override bool CanUseItem(Player player)
         {
-            if (Main.mouseRight)
+            if (player.AltFunction())
             {
                 Item.damage = 280;
                 Item.useTime = 30;
                 Item.useAnimation = 30;
                 Item.autoReuse = true;
                 Item.channel = false;
+                Item.useStyle = ItemUseStyleID.Swing;
             }
             else
             {
@@ -55,6 +59,7 @@ namespace Macrocosm.Content.Items.Weapons.Melee
                 Item.useAnimation = 30;
                 Item.autoReuse = true;
                 Item.channel = true;
+                Item.useStyle = ItemUseStyleID.Shoot;
             }
             return player.ownedProjectileCounts[ModContent.ProjectileType<Procellarum_HalberdProjectile>()] < 1;
         }
